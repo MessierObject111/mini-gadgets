@@ -1,18 +1,23 @@
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 let radius = canvas.height / 2;
-let now = new Date();
+//let now = new Date();
 ctx.translate(radius, radius);
 radius = radius * 0.9;
 drawClock();
-
+setInterval(drawClock(), 1000);
 function drawClock() {
   drawFace(ctx, radius);
   drawNumbers(ctx, radius);
   drawLines(ctx, radius);
   drawHands(ctx, radius);
+  //repainter();
 }
 
+function repainter() {
+  drawHands(ctx, radius);
+  setTimeout(repainter, 1000);
+}
 function drawLines(ctx, radius){
   ctx.save();
   ctx.lineWidth = 5;
@@ -71,11 +76,12 @@ function drawNumbers(ctx, radius) {
 }
 
 function drawHands() {
+  let now = new Date();
   var sec = now.getSeconds();
   var min = now.getMinutes();
   var hr  = now.getHours();
   hr = hr>=12 ? hr-12 : hr;
-
+ console.log(sec);
   // write Hours
   ctx.save();
   ctx.rotate( hr*(Math.PI/6) + (Math.PI/360)*min + (Math.PI/21600)*sec )
