@@ -3,46 +3,46 @@ const diameter = 500;
 const radius = diameter / 2;
 const second_arm_tip_circle_radius = 10;
 function init(){
-clock();
-renderArms();
-setTimeout(init, 1000);
+  clock();
+  renderArms();
+  setTimeout(init, 1000);
 }
 function clock(){
-ctx.save();
-ctx.clearRect(0,0,diameter, diameter);
-ctx.translate(radius, radius);
-ctx.scale(0.8,0.8);
-ctx.rotate(-Math.PI/2);
+  ctx.save();
+  ctx.clearRect(0,0,diameter, diameter);
+  ctx.translate(radius, radius);
+  ctx.scale(0.8,0.8);
+  ctx.rotate(-Math.PI/2);
 
-ctx.strokeStyle = "black";
-ctx.fillStyle = "white";
-ctx.lineWidth = 8;
-ctx.lineCap = "round";
+  ctx.strokeStyle = "black";
+  ctx.fillStyle = "white";
+  ctx.lineWidth = 8;
+  ctx.lineCap = "round";
 
-// Hour marks
-ctx.save();
-for (var i=0;i<12;i++){
-  ctx.beginPath();
-  ctx.rotate(Math.PI/6);
-  ctx.moveTo(0.9 * radius,0);
-  ctx.lineTo(radius,0);
-  ctx.stroke();
-}
-ctx.restore();
-
-// Minute marks
-ctx.save();
-ctx.lineWidth = 5;
-for (i=0;i<60;i++){
-  if (i%5!=0) {
+  // Hour marks
+  ctx.save();
+  for (var i=0;i<12;i++){
     ctx.beginPath();
-    ctx.moveTo(0.95 * radius,0);
+    ctx.rotate(Math.PI/6);
+    ctx.moveTo(0.9 * radius,0);
     ctx.lineTo(radius,0);
     ctx.stroke();
   }
-  ctx.rotate(Math.PI/30);
-}
-ctx.restore();
+  ctx.restore();
+
+  // Minute marks
+  ctx.save();
+  ctx.lineWidth = 5;
+  for (i=0;i<60;i++){
+    if (i%5!=0) {
+      ctx.beginPath();
+      ctx.moveTo(0.95 * radius,0);
+      ctx.lineTo(radius,0);
+      ctx.stroke();
+    }
+    ctx.rotate(Math.PI/30);
+  }
+  ctx.restore();
 
 }
 
